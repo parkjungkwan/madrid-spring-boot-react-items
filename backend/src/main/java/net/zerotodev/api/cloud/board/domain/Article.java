@@ -2,7 +2,6 @@ package net.zerotodev.api.cloud.board.domain;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
-import lombok.NonNull;
 import net.zerotodev.api.cloud.user.domain.User;
 import org.springframework.stereotype.Component;
 
@@ -21,11 +20,11 @@ public class Article {
     @Column(name = "written_date") @NotNull private String writtenDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id")
+    @JoinColumn(name = "item_id", insertable = false, updatable = false)
     private User item;
 
 
