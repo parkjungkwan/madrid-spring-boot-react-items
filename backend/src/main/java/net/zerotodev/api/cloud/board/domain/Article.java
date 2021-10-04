@@ -3,6 +3,7 @@ package net.zerotodev.api.cloud.board.domain;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NonNull;
+import net.zerotodev.api.cloud.user.domain.User;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -18,6 +19,16 @@ public class Article {
     @Column @NotNull private String title;
     @Column @NotNull private String content;
     @Column(name = "written_date") @NotNull private String writtenDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_id")
+    private User item;
+
+
 
 
 
