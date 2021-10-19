@@ -1,26 +1,25 @@
 import React from 'react';
-import { Route, Redirect, Switch } from 'react-router-dom'
-import { CourseRegister, OnlineProfile, Join, Login, SchoolStatus, Navigation } from 'components/index'
-import { HomePage } from "pages/index";
-import './App.css';
-
-function App() {
+import { Route, Redirect, Switch } from 'react-router';
+import {Home, Navigation }from 'features/common';
+import {UserAdd, UserDetail, UserList, UserLogin, UserModify, UserRemove} from 'features/user'
+import { BrowserRouter as Router } from 'react-router-dom'
+const App= () => {
   return (
-    <>
-  <Navigation/>
-  <NavigationForJavaScript/>
-    <Switch>
-    <Route exact path='/' component= { HomePage }/>
-    <Redirect from='/home' to= { '/' }/>
-    <Route exact path='/course-register' component= { CourseRegister }/>
-    <Route exact path='/online-profile' component= { OnlineProfile }/>
-    <Route exact path='/login' component= { Login }/>
-    <Route exact path='/join' component= { Join }/>
-    <Route exact path='/school-status' component= { SchoolStatus }/>
-
-    <Route exact path='/basic' component= { Basic }/>
-
-    </Switch></>
+    <div className="App">
+      <Router>
+      <Navigation/>
+      <Switch>
+        <Route exact path='/' component= {Home}/>
+        <Redirect from='/home' to ={'/'}/>
+        <Route exact path='/userAdd' component={UserAdd}/>
+        <Route exact path='/userDetail' component={UserDetail}/>
+        <Route exact path='/userList' component={UserList}/>
+        <Route exact path='/userLogin' component={UserLogin}/>
+        <Route exact path='/userModify' component={UserModify}/>
+        <Route exact path='/userRemove' component={UserRemove}/>
+      </Switch>
+      </Router>
+    </div>
   );
 }
 

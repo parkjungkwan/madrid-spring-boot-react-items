@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-export function UserAdd() {
+export default function UserAdd() {
 
   return (
     <div>

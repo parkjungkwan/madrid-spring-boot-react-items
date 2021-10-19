@@ -1,28 +1,49 @@
 import React, { useState } from 'react';
+import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  decrement,
-  increment,
-  incrementByAmount,
-  incrementAsync,
-  incrementIfOdd,
-  selectCount,
-} from './counterSlice';
-import styles from './Counter.module.css';
+  login
+} from 'features/user/userSlice';
+import styles from 'features/user/User.module.css';
 
-export function User() {
-  const count = useSelector(selectCount);
-  const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
 
-  const incrementValue = Number(incrementAmount) || 0;
+export default function UserLogin() {
+  const SERVER = 'http://localhost:8080'
+  const [login, setLogin] = useState({})
+  const {username, password} = login
+
+  const handleChange = e => {
+    const {value, name} = e.target
+    setLogin({
+      ...login,
+      [name] : value
+    })
+  }
+  const handleClick = e => {
+    e.preventDefault()
+    const loginRequest = {username, password}
+    alert('로그인 정보: '+JSON.stringify(loginRequest))
+    userLogin(loginRequest)
+    .then(res => {
+      alert('로그인 성공, '+res)
+    })
+    .catch(err => {
+      alert('로그인 실패')
+    })
+
+  }
+  const userLogin = loginRequest => axios.post(`${SERVER}/users/login`, loginRequest)
+
 
   return (
-    <form action="login.php" method="POST">
+    <form method="POST">
     <ul>
-        <li><label for="id">아이디</label><input type="text" id="id"/></li>
-        <li><label for="pw">비밀번호</label><input type="password" id="pw"/></li>
-        <li><input type="submit" title="로그인" value="로그인"/></li>
+        <li><label for="id">아이디</label>
+        <input type="text" id="username" 
+            name='username' value={username} onChange={handleChange}/></li>
+        <li><label for="pw">비밀번호</label>
+        <input type="password" id="password" name="password" onChange={handleChange}/></li>
+        <li><input type="button" title="로그인" value="로그인" onClick={handleClick}/></li>
     </ul>
 </form>
   );
