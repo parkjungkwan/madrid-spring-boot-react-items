@@ -11,6 +11,7 @@ public class HomeController {
 
     @RequestMapping
     public String home(){
+
         return new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
     }
 }

@@ -7,17 +7,24 @@ import net.zerotodev.api.cloud.user.domain.UserSerializer;
 import net.zerotodev.api.cloud.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+@CrossOrigin("*")
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<UserSerializer> getById(@PathVariable long id) throws JsonProcessingException {
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody User user){
+
+        System.out.println("리액트에서 넘어온 정보: "+user.toString());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserSerializer> getById(@PathVariable long id) {
+        System.out.println("--------");
         User user = userService.findById(id).get();
         UserSerializer userSerializer = UserSerializer.builder()
                 .userId(user.getUserId())
