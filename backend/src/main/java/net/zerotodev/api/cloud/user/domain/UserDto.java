@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Getter @Setter @ToString
-public class UserSerializer implements Serializable{
+public class UserDto implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private long userId;
@@ -21,8 +21,8 @@ public class UserSerializer implements Serializable{
     private List<Article> articleList;
 
     @Builder
-    UserSerializer(long userId, String username, String password, String name,
-                   String email, String regDate ){
+    UserDto(long userId, String username, String password, String name,
+            String email, String regDate ){
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -31,8 +31,8 @@ public class UserSerializer implements Serializable{
         this.regDate = regDate;
     }
     @Builder
-    UserSerializer(long userId, String username, String password, String name,
-                   String email, String regDate, List<Article> articleList ){
+    UserDto(long userId, String username, String password, String name,
+            String email, String regDate, List<Article> articleList ){
         this.userId = userId;
         this.username = username;
         this.password = password;
