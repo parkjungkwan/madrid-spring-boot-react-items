@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import net.zerotodev.api.cloud.user.domain.User;
 import net.zerotodev.api.cloud.user.domain.UserDto;
 import net.zerotodev.api.cloud.user.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final UserService userService;
 
     @PostMapping("/login")
