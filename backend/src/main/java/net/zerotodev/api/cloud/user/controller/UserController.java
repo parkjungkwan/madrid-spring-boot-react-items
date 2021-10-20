@@ -1,5 +1,5 @@
 package net.zerotodev.api.cloud.user.controller;
-
+import org.modelmapper.ModelMapper;
 import lombok.RequiredArgsConstructor;
 import net.zerotodev.api.cloud.user.domain.User;
 import net.zerotodev.api.cloud.user.domain.UserDto;
@@ -21,10 +21,9 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody UserDto user){
-        Optional<User> returnUser = userService.login(user.getUsername(), user.getPassword());
-        System.out.println("마리아DB에서 넘어온 정보: "+returnUser.toString());
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Optional<User>> login(@RequestBody UserDto user){
+        return new ResponseEntity<>(
+                userService.login(user.getUsername(), user.getPassword()), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
