@@ -21,7 +21,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping()
-    public ResponseEntity<User> join(@RequestBody UserDto user){
+    public ResponseEntity<User> join(@RequestBody User user){
         logger.info(String.format("User Join Info is %s", user.toString()));
         return null;
     }
