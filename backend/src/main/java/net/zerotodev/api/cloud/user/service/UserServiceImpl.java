@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto login(String username, String password) {
+    public Optional<String> login(String username, String password) {
         return userRepository.login(username, password);
     }
 }

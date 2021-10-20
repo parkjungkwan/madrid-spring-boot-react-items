@@ -7,6 +7,9 @@ import net.zerotodev.api.cloud.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
 @CrossOrigin("*")
 @RequiredArgsConstructor
 @RestController
@@ -16,8 +19,8 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserDto user){
-        UserDto returnUser = userService.login(user.getUsername(), user.getPassword());
-        System.out.println("마리아DB에서 넘어온 정보: "+returnUser.toString());
+        Optional<String> returnUser = userService.login(user.getUsername(), user.getPassword());
+        System.out.println("마리아DB에서 넘어온 정보: "+returnUser.get());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
