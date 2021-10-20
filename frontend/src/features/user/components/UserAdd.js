@@ -25,6 +25,7 @@ export default function UserAdd() {
   const handleSubmit = e => {
       e.preventDefault()
       const joinRequest = {...join}
+      alert(`회원가입 정보: ${JSON.stringify(joinRequest)}`)
       userJoin(joinRequest)
       .then(res =>{
           alert('회원가입 성공')
@@ -42,23 +43,24 @@ export default function UserAdd() {
         <ul>
             <li>
                 <label>
-                    아이디 : <input type="text" id="username" name="username" value={username} size="10" minlength="4" maxlength="15"/>
+                    아이디 : <input type="text" id="username" name="username" value={username} onChange={handleChange}
+                    size="10" minlength="4" maxlength="15"/>
                 </label>
                 <small>4~15자리 이내의 영문과 숫자</small>
             </li>
             <li>
                 <label>
-                    이메일 : <input type="email" id="email" name="email" value={email}/>
+                    이메일 : <input type="email" id="email" name="email" value={email} onChange={handleChange}/>
                 </label>
             </li>
             <li>
                 <label>
-                    비밀 번호 : <input type="password" id="password" name="password" value={password}/>
+                    비밀 번호 : <input type="password" id="password" name="password" value={password} onChange={handleChange}/>
                 </label>
             </li>
             <li>
                 <label>
-                    이름 : <input type="text" id="name" name="name" value={name}/>
+                    이름 : <input type="text" id="name" name="name" value={name} onChange={handleChange}/>
                 </label>
             </li>
            
