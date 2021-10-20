@@ -18,9 +18,9 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserDto user){
-        Optional<String> returnUser = userService.login(user.getUsername(), user.getPassword());
-        System.out.println("마리아DB에서 넘어온 정보: "+returnUser.get());
+    public ResponseEntity<User> login(@RequestBody UserDto user){
+        Optional<User> returnUser = userService.login(user.getUsername(), user.getPassword());
+        System.out.println("마리아DB에서 넘어온 정보: "+returnUser.toString());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -19,11 +19,11 @@ public class Article {
     @Column @NotNull private String content;
     @Column(name = "written_date") @NotNull private String writtenDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "item_id", insertable = false, updatable = false)
     private User item;
 

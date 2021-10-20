@@ -21,7 +21,9 @@ public class User {
     @Column private @NotNull String name;
     @Column private @NotNull String email;
     @Column(name = "reg_date") @NotNull private String regDate;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Article> articleList = new ArrayList<>();
+
+
 
 }
