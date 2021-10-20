@@ -21,9 +21,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<Optional<User>> login(@RequestBody UserDto user){
-        return new ResponseEntity<>(
-                userService.login(user.getUsername(), user.getPassword()), HttpStatus.OK);
+    public ResponseEntity<User> login(@RequestBody UserDto user){
+        return ResponseEntity.ok(userService.login(user.getUsername(), user.getPassword()).get());
     }
 
     @GetMapping("/{id}")
