@@ -20,6 +20,12 @@ public class UserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final UserService userService;
 
+    @PostMapping()
+    public ResponseEntity<User> join(@RequestBody UserDto user){
+        logger.info(String.format("User Join Info is %s", user.toString()));
+        return null;
+    }
+
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody UserDto user){
         return ResponseEntity.ok(userService.login(user.getUsername(), user.getPassword()).get());
