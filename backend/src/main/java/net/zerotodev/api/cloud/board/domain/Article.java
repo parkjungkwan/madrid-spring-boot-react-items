@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Article {
     @Id
     @Column(name = "article_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long articleId;
 
     @Column @NotNull private String title;
