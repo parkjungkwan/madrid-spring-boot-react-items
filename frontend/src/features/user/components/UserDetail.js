@@ -1,76 +1,59 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 
 export default function UserDetail() {
+    const SERVER = 'http://localhost:8080'
+    const history = useHistory()
+    const [detail, setDetail] = useState()
+
+    const fetchOne = () => {
+        const sessionUser = JSON.parse(localStorage.getItem('sessionUser')); 
+        alert('사용자 아이디: '+sessionUser.userId)
+        axios.get(`${SERVER}/users/${sessionUser.userId}`)
+        .then(res => {
+            alert(`회원정보 조회 성공: ${res.data}`)
+        })
+        .catch(err => {
+            alert(`${err}`)
+        })
+    }
 
 
   return (
     <div>
-       <figure>
-        <img  alt=""/>
-        <figcaption>오늘은 남은 인생이 첫째되는 시작날</figcaption>
-    </figure>
-    <h1>Juhyun An</h1>
-    <p>이메일 : ahnju96@gmail.com</p>
-    <h2>Who I am?</h2>
-    <p>경력은 없고 놀고싶습니다</p>
-    <hr/>
-    <h2>Github</h2>
-    <ul>
-        <li>GitHub</li>
-    </ul>
-    <hr/>
-    <h2>Skills</h2>
-    <ul>
-        <li>사용 언어
-            <ul>
-                <li><mark>HTML</mark></li>
-                <li><mark>CSS</mark></li>
-                <li>JAVA</li>
-                <li>Python</li>
-                <li>MongoDB</li>
-                <li>MySQL</li>
-            </ul>
-        </li><br/>
-        <li>사용 툴
-            <ul>
-                <li>IntelliJ</li>
-                <li>PyCharm</li>
-                <li>Docker</li>
-                <li>GitHub</li>
-                <li>Visual Studio</li>
-                <li>Spring Boot</li>
-            </ul>
-        </li>
-    </ul>
-    <br/><hr/>
-    <h2>Academic</h2>
-    <table border="5">
-        <caption>학력 사항</caption>
-        <thead>
-            <tr>
-                <th>출신 학교</th>
-                <th>전공</th>
-                <th>기간</th>
-                <th>졸업구분</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>여자고등학교</td>
-                <td>(해당사항 없음)</td>
-                <td></td>
-                <td>졸업</td>
-            </tr>
-            <tr>
-                <td>여자대학교</td>
-                <td></td>
-                <td></td>
-                <td>졸업</td>
-            </tr>
-        </tbody>
-    </table>
+         <h1>회원정보</h1>
+    
+        <ul>
+            <li>
+                <label>
+                    <span>아이디 :  </span>
+                </label>
+                
+            </li>
+            <li>
+                <label>
+                <span>이메일 :  *******  </span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <span>비밀 번호 :  *******  </span>
+                </label>
+            </li>
+            <li>
+                <label>
+                <span>이름 :  </span>
+                </label>
+            </li>
+           
+            <li>
+                <input type="button" value="회원정보수정"/>
+            </li>
+
+        </ul>
+   
     </div>
   );
 }

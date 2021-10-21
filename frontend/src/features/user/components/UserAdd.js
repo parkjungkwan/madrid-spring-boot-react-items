@@ -1,38 +1,40 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-
+import { useHistory  } from 'react-router-dom';
 
 export default function UserAdd() {
-  const SERVER = 'http://localhost:8080'
-  const [join, setJoin] = useState({
-    username:'', password:'', email:'', name:'', regDate: new Date().toLocaleDateString()
-  })
-  const {username, password, email, name} = join
-  const handleChange = e => {
-      const { value, name } = e.target
-      setJoin({
-          ...join,
-          [name] : value
-      })
-  }
- 
-  const userJoin = joinRequest => 
-            axios.post(`${SERVER}/users`, JSON.stringify(joinRequest),{headers})
-  const headers = {
-    'Content-Type' : 'application/json',
-    'Authorization': 'JWT fefege..'
-  }
-  const handleSubmit = e => {
-      e.preventDefault()
-      const joinRequest = {...join}
-      alert(`회원가입 정보: ${JSON.stringify(joinRequest)}`)
-      userJoin(joinRequest)
-      .then(res =>{
-          alert('회원가입 성공')
-      })
-      .catch(err =>{
-          alert(`회원가입 실패 : ${err}`)
-      })
+    const history = useHistory()
+    const SERVER = 'http://localhost:8080'
+    const [join, setJoin] = useState({
+        username:'', password:'', email:'', name:'', regDate: new Date().toLocaleDateString()
+    })
+    const {username, password, email, name} = join
+    const handleChange = e => {
+        const { value, name } = e.target
+        setJoin({
+            ...join,
+            [name] : value
+        })
+    }
+    
+    const userJoin = joinRequest => 
+                axios.post(`${SERVER}/users`, JSON.stringify(joinRequest),{headers})
+    const headers = {
+        'Content-Type' : 'application/json',
+        'Authorization': 'JWT fefege..'
+    }
+    const handleSubmit = e => {
+        e.preventDefault()
+        const joinRequest = {...join}
+        alert(`회원가입 정보: ${JSON.stringify(joinRequest)}`)
+        userJoin(joinRequest)
+        .then(res =>{
+            alert('회원가입 성공')
+            history.push('/users/login')
+        })
+        .catch(err =>{
+            alert(`회원가입 실패 : ${err}`)
+        })
 
   }
 
