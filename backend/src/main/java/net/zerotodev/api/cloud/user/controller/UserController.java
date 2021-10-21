@@ -24,12 +24,6 @@ public class UserController implements CommonController<User, Long> {
     private final UserService userService;
     private final UserRepository userRepository;
 
-    @PostMapping()
-    public ResponseEntity<User> join(@RequestBody User user){
-        logger.info(String.format("User Join Info is %s", user.toString()));
-        return null;
-    }
-
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody UserDto user){
         return ResponseEntity.ok(userService.login(user.getUsername(), user.getPassword()).get());
@@ -51,37 +45,42 @@ public class UserController implements CommonController<User, Long> {
     }
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public ResponseEntity<List<User>> findAll() {
+        return ResponseEntity.ok(userRepository.findAll());
     }
 
     @Override
-    public User getById(Long id) {
-        return userRepository.getById(id);
+    public ResponseEntity<User> getById(Long id) {
+        return ResponseEntity.ok(userRepository.getById(id));
+    }
+    @PostMapping
+    @Override
+    public ResponseEntity<String> save(@RequestBody User user) {
+        logger.info(String.format("회원가입 정보: %s", user.toString()));
+        userRepository.save(user);
+        return ResponseEntity.ok("SUCCESS");
     }
 
     @Override
-    public void save(User entity) {
-        userRepository.save(entity);
+    public ResponseEntity<Optional<User>> findById(Long id) {
+        return ResponseEntity.ok(userRepository.findById(id));
     }
 
     @Override
-    public Optional<User> findById(Long id) {
-        return userRepository.findById(id);
+    public ResponseEntity<Boolean> existsById(Long id) {
+        return ResponseEntity.ok(userRepository.existsById(id));
     }
 
     @Override
-    public boolean existsById(Long id) {
-        return userRepository.existsById(id);
+    public ResponseEntity<Long> count() {
+        return ResponseEntity.ok(userRepository.count());
     }
 
     @Override
-    public long count() {
-        return userRepository.count();
-    }
-
-    @Override
-    public void deleteById(Long id) {
+    public ResponseEntity<String> deleteById(Long id) {
         userRepository.deleteById(id);
+        return ResponseEntity.ok("SUCCESS");
     }
+
+
 }
