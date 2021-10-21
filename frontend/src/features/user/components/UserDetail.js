@@ -13,12 +13,15 @@ export default function UserDetail() {
         alert('사용자 아이디: '+sessionUser.userId)
         axios.get(`${SERVER}/users/${sessionUser.userId}`)
         .then(res => {
-            alert(`회원정보 조회 성공: ${res.data}`)
+            setDetail(res.data)
         })
         .catch(err => {
             alert(`${err}`)
         })
     }
+    useEffect(() => {
+        fetchOne()
+    }, [])
 
 
   return (
@@ -28,13 +31,19 @@ export default function UserDetail() {
         <ul>
             <li>
                 <label>
-                    <span>아이디 :  </span>
+                    <span>회원번호 : {detail.userId} </span>
                 </label>
                 
             </li>
             <li>
                 <label>
-                <span>이메일 :  *******  </span>
+                    <span>아이디 : {detail.username} </span>
+                </label>
+                
+            </li>
+            <li>
+                <label>
+                <span>이메일 :  {detail.email}  </span>
                 </label>
             </li>
             <li>
@@ -44,7 +53,7 @@ export default function UserDetail() {
             </li>
             <li>
                 <label>
-                <span>이름 :  </span>
+                <span>이름 : {detail.name} </span>
                 </label>
             </li>
            

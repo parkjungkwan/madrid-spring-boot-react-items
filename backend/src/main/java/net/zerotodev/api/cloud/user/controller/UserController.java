@@ -28,20 +28,10 @@ public class UserController implements CommonController<User, Long> {
     public ResponseEntity<User> login(@RequestBody UserDto user){
         return ResponseEntity.ok(userService.login(user.getUsername(), user.getPassword()).get());
     }
-
+    @Override
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getById(@PathVariable long id) {
-        System.out.println("--------");
-        User user = userService.findById(id).get();
-        UserDto userSerializer = UserDto.builder()
-                .userId(user.getUserId())
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .name(user.getName())
-                .email(user.getEmail())
-                .regDate(user.getRegDate())
-                .build();
-        return new ResponseEntity<>(userSerializer, HttpStatus.OK);
+    public ResponseEntity<User> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(userRepository.getById(id));
     }
 
     @Override
@@ -49,10 +39,7 @@ public class UserController implements CommonController<User, Long> {
         return ResponseEntity.ok(userRepository.findAll());
     }
 
-    @Override
-    public ResponseEntity<User> getById(Long id) {
-        return ResponseEntity.ok(userRepository.getById(id));
-    }
+
     @PostMapping
     @Override
     public ResponseEntity<String> save(@RequestBody User user) {
