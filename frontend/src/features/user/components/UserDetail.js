@@ -58,7 +58,7 @@ export default function UserDetail() {
             </li>
            
             <li>
-                <input type="button" value="회원정보수정"/>
+                <input type="button" value="회원정보수정" onClick={()=> history.push('/users/modify')}/>
             </li>
 
         </ul>
