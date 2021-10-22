@@ -26,7 +26,11 @@ public class UserController implements CommonController<User, Long> {
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody UserDto user){
-        return ResponseEntity.ok(userService.login(user.getUsername(), user.getPassword()).get());
+        System.out.println("####"+user.toString());
+        Optional<User> u = userService.login(user.getUsername(), user.getPassword());
+        User u2 = u.get();
+        System.out.println(">>>>>>"+u2.toString());
+        return ResponseEntity.ok(u2);
     }
     @Override
     @GetMapping("/{id}")
@@ -46,6 +50,13 @@ public class UserController implements CommonController<User, Long> {
         logger.info(String.format("회원가입 정보: %s", user.toString()));
         userRepository.save(user);
         return ResponseEntity.ok("SUCCESS");
+    }
+
+    @PutMapping
+    public ResponseEntity<User> update(@RequestBody User user) {
+        logger.info(String.format("회원수정 정보: %s", user.toString()));
+        userRepository.save(user);
+        return ResponseEntity.ok(userRepository.getById(user.getUserId()));
     }
 
     @Override

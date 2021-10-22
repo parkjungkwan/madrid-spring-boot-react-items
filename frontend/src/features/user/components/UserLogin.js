@@ -20,6 +20,7 @@ export default function UserLogin() {
   }
   const handleClick = e => {
     e.preventDefault()
+    e.stopPropagation()
     const loginRequest = {username, password}
     userLogin(loginRequest)
     .then(res => {
@@ -28,12 +29,12 @@ export default function UserLogin() {
       history.push("/users/detail")
     })
     .catch(err => {
-      alert('로그인 실패' + err)
+      alert('로그인 실패 2' + err)
     })
 
   }
   const userLogin = loginRequest => 
-    axios.post(`${SERVER}/users/login`, JSON.stringify(loginRequest),{headers})
+   axios.post(`${SERVER}/users/login`, JSON.stringify(loginRequest),{headers})
   return (
     <form method="POST">
     <ul>

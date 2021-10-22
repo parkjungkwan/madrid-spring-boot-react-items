@@ -6,7 +6,7 @@ export default function UserModify() {
     const history = useHistory()
     const SERVER = 'http://localhost:8080'
     const sessionUser = JSON.parse(localStorage.getItem('sessionUser')); 
-    const [join, setJoin] = useState({
+    const [modify, setModify] = useState({
         userId: sessionUser.userId,
         username:sessionUser.username, 
         password:sessionUser.password, 
@@ -14,32 +14,33 @@ export default function UserModify() {
         name:sessionUser.name, 
         regDate: sessionUser.regDate
     })
-    const {username, password, email, name} = join
+    const {userId, username, password, email, name} = modify
     const handleChange = e => {
         const { value, name } = e.target
-        setJoin({
-            ...join,
+        setModify({
+            ...modify,
             [name] : value
         })
     }
-    
-    const userJoin = joinRequest => 
-                axios.post(`${SERVER}/users`, JSON.stringify(joinRequest),{headers})
     const headers = {
-        'Content-Type' : 'application/json',
-        'Authorization': 'JWT fefege..'
-    }
+      'Content-Type' : 'application/json',
+      'Authorization': 'JWT fefege..'
+  }
+    const UserModify = modifyRequest => 
+                axios.put(`${SERVER}/users`, JSON.stringify(modifyRequest),{headers})
+    
     const handleSubmit = e => {
         e.preventDefault()
-        const joinRequest = {...join}
-        alert(`회원가입 정보: ${JSON.stringify(joinRequest)}`)
-        userJoin(joinRequest)
+        const modifyRequest = {...modify}
+        alert(`회원수정 정보: ${JSON.stringify(modifyRequest)}`)
+        UserModify(modifyRequest)
         .then(res =>{
-            alert('회원가입 성공')
-            history.push('/users/login')
+            alert('회원 정보 수정 성공')
+            localStorage.setItem('sessionUser', JSON.stringify(res.data))
+            history.push("/users/detail")
         })
         .catch(err =>{
-            alert(`회원가입 실패 : ${err}`)
+            alert(`회원수정 실패 : ${err}`)
         })
 
   }
@@ -47,7 +48,7 @@ export default function UserModify() {
   return (
     <div>
          <h1>회원정보 수정</h1>
-    <form onSubmit={handleSubmit} method='POST'>
+    <form onSubmit={handleSubmit} method='PUT'>
         <ul>
             <li>
               <label>
@@ -62,17 +63,22 @@ export default function UserModify() {
             <li>
                 <label>
                     이메일 : <input type="email" id="email" name="email" placeholder={sessionUser.email}
+                                  value={email}
                                  onChange={handleChange}/>
                 </label>
             </li>
             <li>
                 <label>
-                    비밀 번호 : <input type="password" id="password" name="password" placeholder={sessionUser.password} onChange={handleChange}/>
+                    비밀 번호 : <input type="password" id="password" name="password" placeholder={sessionUser.password} 
+                    value={password}
+                    onChange={handleChange}/>
                 </label>
             </li>
             <li>
                 <label>
-                    이름 : <input type="text" id="name" name="name" placeholder={sessionUser.name} onChange={handleChange}/>
+                    이름 : <input type="text" id="name" name="name" placeholder={sessionUser.name}
+                    value={name}
+                    onChange={handleChange}/>
                 </label>
             </li>
            
