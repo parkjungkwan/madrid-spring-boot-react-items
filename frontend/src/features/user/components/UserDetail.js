@@ -22,7 +22,7 @@ export default function UserDetail() {
     }
     useEffect(() => {
         fetchOne()
-    }, [detail])
+    }, [])
 
 
   return (
