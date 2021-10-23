@@ -1,7 +1,7 @@
 import React from 'react'
 
 const UserListForm = ({list}) => {
-    return (<table>
+    return (<table border='1px' style={{textAlign:'center'}}>
     <thead>
     <tr><th>사용자번호</th>
         <th>사용자아이디</th>
