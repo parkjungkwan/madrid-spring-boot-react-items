@@ -34,7 +34,7 @@ public class UserController implements CommonController<User, Long> {
     public ResponseEntity<User> getById(@PathVariable Long id) {
         return ResponseEntity.ok(userRepository.getById(id));
     }
-
+    @GetMapping()
     @Override
     public ResponseEntity<List<User>> findAll() {
         return ResponseEntity.ok(userRepository.findAll());

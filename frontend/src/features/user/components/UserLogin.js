@@ -18,6 +18,11 @@ export default function UserLogin() {
     'Content-Type' : 'application/json',
     'Authorization': 'JWT fefege..'
   }
+  const changeNull = ls =>{
+    for(const i of ls ){
+      document.getElementById(i).value = ''
+    }
+  }
   const handleClick = e => {
     e.preventDefault()
     e.stopPropagation()
@@ -31,14 +36,12 @@ export default function UserLogin() {
         history.push("/users/detail")
       }else{
         alert('아이디, 비번 오류로 로그인 실패  ')
-        document.getElementById('username').value = ''
-        document.getElementById('password').value = ''
+        changeNull(['username','password'])
       }
     })
     .catch(err => {
       alert('접속 실패' + err)
-      document.getElementById('username').value = ''
-      document.getElementById('password').value = ''
+      changeNull(['username','password'])
     })
 
   }
