@@ -39,13 +39,11 @@ export default function UserDetail() {
                 <label>
                     <span>회원번호 : {detail.userId} </span>
                 </label>
-                
             </li>
             <li>
                 <label>
                     <span>아이디 : {detail.username} </span>
                 </label>
-                
             </li>
             <li>
                 <label>
@@ -69,9 +67,7 @@ export default function UserDetail() {
             <li>
                 <input type="button" value="로그아웃" onClick={logout}/>
             </li>
-
         </ul>
-   
     </div>
   );
 }
