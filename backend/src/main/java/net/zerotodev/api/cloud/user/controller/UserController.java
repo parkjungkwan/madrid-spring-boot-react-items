@@ -26,11 +26,8 @@ public class UserController implements CommonController<User, Long> {
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody UserDto user){
-        System.out.println("####"+user.toString());
-        Optional<User> u = userService.login(user.getUsername(), user.getPassword());
-        User u2 = u.get();
-        System.out.println(">>>>>>"+u2.toString());
-        return ResponseEntity.ok(u2);
+        return ResponseEntity.ok(
+                userService.login(user.getUsername(), user.getPassword()).orElse(new User()));
     }
     @Override
     @GetMapping("/{id}")
