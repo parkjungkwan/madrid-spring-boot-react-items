@@ -24,6 +24,11 @@ export default function UserDetail() {
         fetchOne()
     }, [])
 
+    const logout = e => {
+        e.preventDefault()
+        localStorage.setItem('sessionUser','')
+        history.push('/')
+    }
 
   return (
     <div>
@@ -60,6 +65,9 @@ export default function UserDetail() {
            
             <li>
                 <input type="button" value="회원정보수정" onClick={()=> history.push('/users/modify')}/>
+            </li>
+            <li>
+                <input type="button" value="로그아웃" onClick={logout}/>
             </li>
 
         </ul>

@@ -7,18 +7,14 @@ export default function UserRemove() {
   const sessionUser = JSON.parse(localStorage.getItem('sessionUser'))
   const history = useHistory()
   const SERVER = 'http://localhost:8080'
-  const headers = {
-    'Content-Type' : 'application/json',
-    'Authorization': 'JWT fefege..'
-  }
+  
   const handleChange = e => {
     setPwd(e.target.value)
   }
   const handleClick = e => {
     e.preventDefault()
-    const removeRequest = sessionUser
     if(sessionUser.password === pwd){
-      axios.delete(`${SERVER}/users`, JSON.stringify(removeRequest),{headers})
+      axios.delete(`${SERVER}/users/${sessionUser.userId}`)
       .then(res => {
         console.log(res.data)
         localStorage.setItem('sessionUser', '')
@@ -34,16 +30,16 @@ export default function UserRemove() {
   return (
     <div>
       <h1>회원탈퇴</h1>
-      <form method="POST">
+      <form method="DELETE">
     <ul>
         <li>
               <label>
-                    <span>사용자아이디 : {sessionUser.userId} </span>
+                    <span>사용자아이디 : {sessionUser.username} </span>
                 </label>
             </li>
         <li><label for="pw">비밀번호 확인</label>
         <input type="password" id="password" name="password" onChange={handleChange}/></li>
-        <li><input type="button" value="탈퇴요청" onClick={handleClick}/></li>
+        <li><input type="submit" value="탈퇴요청" onClick={handleClick}/></li>
         <li><input type="button" value="탈퇴취소" onClick={e => history.push("/users/detail")}/></li>
     </ul>
 </form>

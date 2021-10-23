@@ -6,11 +6,13 @@ import net.zerotodev.api.cloud.item.domain.Item;
 import net.zerotodev.api.cloud.item.repository.ItemRepository;
 import net.zerotodev.api.cloud.item.service.ItemService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
-
+@RequestMapping("/items")
 @RequiredArgsConstructor
 @RestController
 public class ItemController implements CommonController<Item, Long> {
@@ -49,6 +51,7 @@ public class ItemController implements CommonController<Item, Long> {
         return ResponseEntity.ok(itemRepository.count());
     }
 
+    @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<String> deleteById(Long id) {
         itemRepository.deleteById(id);
