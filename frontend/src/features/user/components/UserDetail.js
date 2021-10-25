@@ -4,7 +4,6 @@ import axios from 'axios';
 
 
 export default function UserDetail() {
-    const SERVER = 'http://localhost:8080'
     const history = useHistory()
     const [detail, setDetail] = useState({
         userId:'', username:'', password:'', email:'', name:'', regDate: new Date().toLocaleDateString()
@@ -12,7 +11,7 @@ export default function UserDetail() {
     
     const fetchOne = () => {
         const sessionUser = JSON.parse(localStorage.getItem('sessionUser'))
-        axios.get(`${SERVER}/users/${sessionUser.userId}`)
+        userFetchOne(sessionUser)
         .then(res => {
             setDetail(res.data)
         })
@@ -33,7 +32,6 @@ export default function UserDetail() {
   return (
     <div>
          <h1>회원정보</h1>
-    
         <ul>
             <li>
                 <label>

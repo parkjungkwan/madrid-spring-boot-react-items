@@ -16,7 +16,6 @@ export default function UserAdd() {
             [name] : value
         })
     }
-    
     const userJoin = joinRequest => 
                 axios.post(`${SERVER}/users`, JSON.stringify(joinRequest),{headers})
     const headers = {
@@ -35,7 +34,6 @@ export default function UserAdd() {
         .catch(err =>{
             alert(`회원가입 실패 : ${err}`)
         })
-
   }
 
   return (
