@@ -36,7 +36,9 @@ export const removePage = createAsyncThunk('users/remove', userRemovePage)
 const userSlice = createSlice({
   name: users,
   initialState: {
-    userState: {},
+    userState: {
+      username:'', password:'', email:'', name:'', regDate: ''
+    },
     type: '',
     keyword: '',
     params: {}
