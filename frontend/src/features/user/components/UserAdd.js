@@ -9,7 +9,7 @@ export default function UserAdd() {
     const history = useHistory()
     const dispatch = useDispatch()
     const [join, setJoin] = useState({
-        username:'', password:'', email:'', name:'', regDate: new Date().toLocaleDateString()
+        username:'', password:'', email:'', name:'', regDate: ''
     })
     const {username, password, email, name} = join
     const handleChange = useCallback(
@@ -24,7 +24,7 @@ export default function UserAdd() {
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        alert(`회원가입 ID 1: ${join.username}`)
         const formData = new FormData()
         formData.append('username', join.username)
         formData.append('password', join.password)
@@ -32,7 +32,7 @@ export default function UserAdd() {
         formData.append('name', join.name)
         formData.append('regDate', join.regDate)
 
-        alert(`회원가입 ID: ${formData[0]}`)
+        alert(`회원가입 ID 2: ${formData.get('username')}`)
         await dispatch(joinPage(formData))
         alert(`${join.username} 회원가입 환영`)
         history.push('/users/login')
