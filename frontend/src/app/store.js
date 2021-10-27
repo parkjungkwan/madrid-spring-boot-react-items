@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { getDefaultNormalizer } from '@testing-library/dom';
 import counterReducer from 'features/counter/counterSlice';
-import userReducer from 'features/user/userSlice';
+import { userReducer } from 'features/user';
+
+const rootReducer = combineReducers({ userReducer })
 
 export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-    user: userReducer
-  },
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
