@@ -7,14 +7,14 @@ export default function UserList() {
   const [list, setList] = useState([])
  
 
-  const fetchList = () => {
-      userFetchList()
+  const userList = () => {
+    userList()
       .then(res => setList(res.data) )
       .catch(err => console.log(err))
   }
 
   useEffect(() =>{
-    fetchList() 
+    userList() 
   }, [])
   return (
     <div>

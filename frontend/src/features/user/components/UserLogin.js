@@ -22,6 +22,7 @@ export default function UserLogin() {
     e.preventDefault()
     e.stopPropagation()
     const loginRequest = {username, password}
+    /*
     userLogin(loginRequest)
     .then(res => {
       const user = res.data;
@@ -38,7 +39,7 @@ export default function UserLogin() {
       alert('접속 실패' + err)
       changeNull(['username','password'])
     })
-
+    */
   }
  
   return (

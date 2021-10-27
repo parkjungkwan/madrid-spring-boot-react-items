@@ -1,7 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { getDefaultNormalizer } from '@testing-library/dom';
+import {
+  configureStore,
+  combineReducers, // redux의 그것과 같다.
+  getDefaultMiddleware
+} from "@reduxjs/toolkit";
+import logger from 'redux-logger'
 import counterReducer from 'features/counter/counterSlice';
-import { userReducer } from 'features/user';
+import userReducer from 'features/user/reducer/userSlice';
 
 const rootReducer = combineReducers({ userReducer })
 
