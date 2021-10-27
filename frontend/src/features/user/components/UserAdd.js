@@ -18,21 +18,24 @@ export default function UserAdd() {
                 ...join,
                 [name] : value
             })
-        }
+        }, [join]
     ) 
     
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        const joinRequest = {...join}
-        
-        userJoin(joinRequest)
-        .then(res =>{
-            alert('회원가입 성공')
-            history.push('/users/login')
-        })
-        .catch(err =>{
-            alert(`회원가입 실패 : ${err}`)
-        })
+
+        const formData = new FormData()
+        formData.append('username', join.username)
+        formData.append('password', join.password)
+        formData.append('email', join.email)
+        formData.append('name', join.name)
+        formData.append('regDate', join.regDate)
+
+        alert(`회원가입 ID: ${formData[0]}`)
+        await dispatch(joinPage(formData))
+        alert(`${join.username} 회원가입 환영`)
+        history.push('/users/login')
+
   }
 
   return (
@@ -64,7 +67,7 @@ export default function UserAdd() {
             </li>
            
             <li>
-                <input type="submit" value="회원가입"/>
+                <input type="submit" onClick={ e => handleSubmit(e)} value="회원가입"/>
             </li>
 
         </ul>
