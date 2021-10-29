@@ -4,7 +4,7 @@ import { useHistory  } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { joinPage } from 'features/user/reducer/userSlice'
 
-``
+
 export default function UserAdd() {
     const history = useHistory()
     const dispatch = useDispatch()
