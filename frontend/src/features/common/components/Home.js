@@ -2,15 +2,13 @@ import React from 'react';
 import { useHistory  } from 'react-router-dom';
 export default function Home() {
   const history = useHistory()
-  const sessionUser = JSON.parse(localStorage.getItem("sessionUser"))
-  const logout = e => {
-    e.preventDefault()
-    localStorage.setItem('sessionUser','')
-    history.push('/')
-}
+  //const sessionUser = JSON.parse(localStorage.getItem("sessionUser"))
+  const sessionUser = {}
+  
+  
   return (
     <div>
-      {sessionUser !== null && <input type="button" value="로그아웃" onClick={logout}/>}
+      {sessionUser !== null && <input type="button" value="로그아웃" />}
       <h1>시간이란...</h1>
       <p>내일 죽을 것처럼 오늘을 살고 
           영원히 살 것처럼 내일을 꿈구어라.</p>

@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
-
+import { useDispatch } from 'react-redux';
+import { logout } from 'features/user/reducer/userSlice'
 export default function UserDetail() {
-    const detail = JSON.parse(localStorage.getItem('sessionUser'))
+    const detail = JSON.parse(window.localStorage.getItem('sessionUser'))
+    
     const dispatch = useDispatch()
+    const history = useHistory()
   return (
     <div>
          <h1>회원정보</h1>
@@ -39,7 +41,7 @@ export default function UserDetail() {
                 <input type="button" value="회원정보수정" onClick={()=> history.push('/users/modify')}/>
             </li>
             <li>
-                <input type="button" value="로그아웃" onClick={dispatch(logout())}/>
+                <input type="button" value="로그아웃" />
             </li>
         </ul>
     </div>
