@@ -51,6 +51,7 @@ const userSlice = createSlice({
   extraReducers: {
     [joinPage.fulfilled]: ( state, action ) => { 
       state.userState = action.payload 
+      window.location.href = `/users/login`
     },
     [detailPage.fulfilled]: ( state, {meta, payload} ) => { state.userState = payload},
     [listPage.fulfilled]: ( state, {meta, payload} ) => { state.pageResult = payload },
