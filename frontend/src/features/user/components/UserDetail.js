@@ -10,14 +10,14 @@ export default function UserDetail() {
     })
     
     const userDetail = () => {
-        const sessionUser = JSON.parse(localStorage.getItem('sessionUser'))
-        userDetail(sessionUser)
-        .then(res => {
-            setDetail(res.data)
-        })
-        .catch(err => {
-            alert(`${err}`)
-        })
+        // const sessionUser = JSON.parse(localStorage.getItem('sessionUser'))
+        // userDetail(sessionUser)
+        // .then(res => {
+        //     setDetail(res.data)
+        // })
+        // .catch(err => {
+        //     alert(`${err}`)
+        // })
     }
     useEffect(() => {
         userDetail()

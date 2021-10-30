@@ -32,7 +32,11 @@ export const listPage = createAsyncThunk('users/list', userListPage)
 export const loginPage = createAsyncThunk('users/login', userLoginPage)
 export const modifyPage = createAsyncThunk('users/modify', userModifyPage)
 export const removePage = createAsyncThunk('users/remove', userRemovePage)
-
+const changeNull = ls =>{
+  for(const i of ls ){
+    document.getElementById(i).value = ''
+  }
+}
 const userSlice = createSlice({
   name: 'users',
   initialState: {
@@ -53,6 +57,13 @@ const userSlice = createSlice({
     [loginPage.fulfilled]: ( state, {meta, payload} ) => {
       state.userState = payload
       window.localStorage.setItem('sessionUser', JSON.stringify(payload))
+      if(payload.username != null){
+        alert(`${payload.name}님 환영합니다`)
+        window.location.href = `/users/detail`
+      }else{
+        alert('아이디, 비번 오류로 로그인 실패  ')
+        changeNull(['username','password'])
+      }
     },
     [modifyPage.fulfilled]: ( state, action ) => { 
       state.userState = action.payload 
