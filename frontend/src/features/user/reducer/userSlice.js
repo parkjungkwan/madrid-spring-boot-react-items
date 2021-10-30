@@ -32,6 +32,10 @@ export const listPage = createAsyncThunk('users/list', userListPage)
 export const loginPage = createAsyncThunk('users/login', userLoginPage)
 export const modifyPage = createAsyncThunk('users/modify', userModifyPage)
 export const removePage = createAsyncThunk('users/remove', userRemovePage)
+export const logout = () => {
+  window.localStorage.setItem('sessionUser','')
+  window.location.href = '/home'
+}
 const changeNull = ls =>{
   for(const i of ls ){
     document.getElementById(i).value = ''

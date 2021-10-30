@@ -1,6 +1,5 @@
 
-import React, { useState, useCallback } from 'react';
-import { useHistory  } from 'react-router-dom';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { joinPage } from 'features/user/reducer/userSlice'
 import { useForm } from "react-hook-form";
@@ -12,8 +11,8 @@ export default function UserAdd() {
     return (
         <div>
             <h1>회원 가입</h1>
-        <form method='POST' onSubmit={
-            handleSubmit(async (data) => {await dispatch(joinPage({...data, 
+        <form method='POST' 
+        onSubmit={ handleSubmit(async (data) => {await dispatch(joinPage({...data, 
                                             regDate: new Date().toLocaleDateString()}))})}>
             <ul>
                 <li>

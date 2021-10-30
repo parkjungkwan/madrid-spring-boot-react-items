@@ -1,34 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-
 export default function UserDetail() {
-    const history = useHistory()
-    const [detail, setDetail] = useState({
-        userId:'', username:'', password:'', email:'', name:'', regDate: new Date().toLocaleDateString()
-    })
-    
-    const userDetail = () => {
-        const sessionUser = JSON.parse(localStorage.getItem('sessionUser'))
-        userDetail(sessionUser)
-        .then(res => {
-            setDetail(res.data)
-        })
-        .catch(err => {
-            alert(`${err}`)
-        })
-    }
-    useEffect(() => {
-        userDetail()
-    }, [])
-
-    const logout = e => {
-        e.preventDefault()
-        localStorage.setItem('sessionUser','')
-        history.push('/')
-    }
-
+    const detail = JSON.parse(localStorage.getItem('sessionUser'))
+    const dispatch = useDispatch()
   return (
     <div>
          <h1>회원정보</h1>
@@ -63,7 +39,7 @@ export default function UserDetail() {
                 <input type="button" value="회원정보수정" onClick={()=> history.push('/users/modify')}/>
             </li>
             <li>
-                <input type="button" value="로그아웃" onClick={logout}/>
+                <input type="button" value="로그아웃" onClick={dispatch(logout())}/>
             </li>
         </ul>
     </div>

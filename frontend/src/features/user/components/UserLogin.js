@@ -1,34 +1,24 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory  } from 'react-router-dom';
 import { loginPage } from 'features/user/reducer/userSlice'
 import { useForm } from "react-hook-form";
 import styled from 'styled-components'
+
 export default function UserLogin() {
   const dispatch = useDispatch()
-  const [login, setLogin] = useState({username:'', password:''})
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const {username, password} = login
-  const handleChange = useCallback(
-    e => {
-        const { value, name } = e.target
-        setLogin({
-            ...login,
-            [name] : value
-        })
-    }, [login]
-) 
+
   return (
     <div>
          <h1>로그인</h1>
     <form method='POST' 
-    onSubmit={ handleSubmit(async () => {await dispatch(loginPage({username, password}))})}>
+    onSubmit={ 
+      handleSubmit(async (data) => {await dispatch(loginPage(data))})}>
         <ul>
             <li>
                 <label>아이디 : </label>
                 <input type="text" id="username" 
                     {...register('username', { required: true, maxLength: 30 })}
-                    name="username" value={username} onChange={handleChange}
                     size="10" minlength="4" maxlength="15"/>
                     {errors.username && errors.username.type === "required" && (
                         <Span role="alert">아이디는 필수값입니다</Span>
@@ -44,7 +34,6 @@ export default function UserLogin() {
                 <input type="password" id="password" 
                     aria-invalid={errors.name ? "true" : "false"}
                     {...register('password', { required: true, maxLength: 30 })}
-                    name="password" value={password} onChange={handleChange}
                     size="10" minlength="1" maxlength="15"/>
                 {errors.password && errors.password.type === "required" && (
                     <Span role="alert">비밀 번호는 필수값입니다</Span>
