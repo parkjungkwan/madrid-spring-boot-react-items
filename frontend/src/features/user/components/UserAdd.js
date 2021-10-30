@@ -67,10 +67,10 @@ export default function UserAdd() {
                     name="email" value={email} onChange={handleChange}
                     size="10" minlength="4" maxlength="15"/>
                 {/* use role="alert" to announce the error message */}
-                {errors.name && errors.name.type === "required" && (
+                {errors.email && errors.email.type === "required" && (
                     <Span role="alert">아이디는 필수값입니다</Span>
                 )}
-                {errors.name && errors.name.type === "maxLength" && (
+                {errors.email && errors.email.type === "maxLength" && (
                     <Span role="alert">아이디는 4자에서 15 글자이어야 합니다.</Span>
                 )}
             </li>
