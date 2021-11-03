@@ -44,12 +44,12 @@ const userSlice = createSlice({
     userState: {
       username:'', password:'', email:'', name:'', regDate: ''
     },
-    
+    usersState: [],
     type: '',
     keyword: '',
     params: {}
   },
-  usersState: [],
+  
   reducers: {},
   extraReducers: {
     [joinPage.fulfilled]: ( state, action ) => { 

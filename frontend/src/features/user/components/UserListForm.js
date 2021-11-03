@@ -6,6 +6,8 @@ const UserListForm = () => {
     dispatch(listPage())
     const users = useSelector(state => state.userReducer.usersState)
 
+    useEffect()
+
     return (<table border='1px' style={{textAlign:'center'}}>
     <thead>
     <tr><th>사용자번호</th>
