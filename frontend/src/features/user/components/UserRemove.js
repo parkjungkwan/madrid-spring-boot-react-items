@@ -13,10 +13,8 @@ export default function UserRemove() {
       <h1>회원탈퇴</h1>
       <form method="DELETE" onSubmit={useCallback(
         e => {
-          (sessionUser.password === pwd) ?
-            dispatch(removePage(sessionUser.userId))
-            :
-            document.getElementById('password').value = ''
+          (sessionUser.password === pwd) ? dispatch(removePage(sessionUser.userId))
+          : document.getElementById('password').value = ''
         })
       }>
     <ul>

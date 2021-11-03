@@ -24,12 +24,12 @@ export default function UserModify() {
   return (
     <div>
          <h1>회원정보 수정</h1>
-    <form onSubmit={useCallback(
+    <form method='PUT' onSubmit={useCallback(
         e => {
             e.preventDefault()
             dispatch(modifyPage({...modify}))
         }
-    )} method='PUT'>
+    )} >
         <ul>
             <li>
               <label>
