@@ -75,9 +75,9 @@ const userSlice = createSlice({
       window.location.href = "/users/detail"
     },
     [removePage.fulfilled]: () => { 
-      window.localStorage.clear()
+      window.localStorage.removeItem("sessionUser"); 
+      window.localStorage.clear(); 
       window.location.href = "/home"
-      
     }
   }
 

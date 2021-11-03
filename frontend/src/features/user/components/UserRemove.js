@@ -11,8 +11,8 @@ export default function UserRemove() {
   return (
     <div>
       <h1>회원탈퇴</h1>
-      <form method="DELETE" onSubmit={useCallback(
-        e => {
+      <form method="DELETE" onSubmit={useCallback(e => {
+          e.preventDefault();
           (sessionUser.password === pwd) ? dispatch(removePage(sessionUser.userId))
           : document.getElementById('password').value = ''
         })
