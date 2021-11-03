@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listPage } from 'features/user/reducer/userSlice'
-const UserListForm = () => {
+const UserList = () => {
     const dispatch = useDispatch()
-    dispatch(listPage())
-    const users = useSelector(state => state.userReducer.usersState)
+    const users = useSelector(state => state.userReducer.usersState);
+    useEffect(() => {
+        dispatch(listPage())
+    },[]);
 
     return (<table border='1px' style={{textAlign:'center'}}>
     <thead>
@@ -25,4 +27,4 @@ const UserListForm = () => {
     </table>)
 }
 
-export default UserListForm
+export default UserList
