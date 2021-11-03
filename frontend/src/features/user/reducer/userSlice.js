@@ -74,8 +74,10 @@ const userSlice = createSlice({
       localStorage.setItem('sessionUser', JSON.stringify(action.payload))
       window.location.href = "/users/detail"
     },
-    [removePage.fulfilled]: ( state, {meta, payload }) => { 
+    [removePage.fulfilled]: () => { 
       window.localStorage.clear()
+      window.location.href = "/home"
+      
     }
   }
 

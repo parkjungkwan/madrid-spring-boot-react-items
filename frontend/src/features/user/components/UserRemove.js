@@ -23,7 +23,7 @@ export default function UserRemove() {
                     <span>사용자아이디 : {sessionUser.username} </span>
                 </label>
             </li>
-        <li><label for="pw">비밀번호 확인</label>
+        <li><label htmlFor="pw">비밀번호 확인</label>
         <input type="password" id="password" name="password" onChange={e => {setPwd(e.target.value)}}/></li>
         <li><input type="submit" value="탈퇴요청" /></li>
         <li><input type="button" value="탈퇴취소" onClick={e => history.push("/users/detail")}/></li>
