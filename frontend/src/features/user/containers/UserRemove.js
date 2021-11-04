@@ -1,19 +1,20 @@
 import React, { useCallback, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { removePage } from 'features/user/reducer/userSlice'
+import { useHistory } from 'react-router-dom';
+import { remove } from 'features/user/reducer/userSlice'
 import { useDispatch } from 'react-redux';
-
+import Layout from 'features/common/components/Layout';
+import styled from 'styled-components'
 export default function UserRemove() {
   const [pwd, setPwd] = useState('')
   const sessionUser = JSON.parse(localStorage.getItem('sessionUser'))
   const history = useHistory()
   const dispatch = useDispatch()
   return (
-    <div>
+    <Layout><Main>
       <h1>회원탈퇴</h1>
       <form method="DELETE" onSubmit={useCallback(e => {
           e.preventDefault();
-          (sessionUser.password === pwd) ? dispatch(removePage(sessionUser.userId))
+          (sessionUser.password === pwd) ? dispatch(remove(sessionUser.userId))
           : document.getElementById('password').value = ''
         })
       }>
@@ -30,6 +31,13 @@ export default function UserRemove() {
     </ul>
 </form>
 
-    </div>
+</Main></Layout>
   );
 }
+
+const Main = styled.div`
+width: 500px;
+margin: 0 auto;
+text-decoration:none
+text-align: center;
+`

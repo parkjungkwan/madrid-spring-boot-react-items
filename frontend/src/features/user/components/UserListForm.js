@@ -1,12 +1,20 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { listPage } from 'features/user/reducer/userSlice'
+import styled from 'styled-components'
+import { list } from 'features/user/reducer/userSlice'
 const UserListForm = () => {
+    
     const dispatch = useDispatch()
-    dispatch(listPage())
-    const users = useSelector(state => state.userReducer.usersState)
 
-    useEffect()
+    const users = useSelector(state => state.user.usersState);
+    const type = useSelector(state => state.user.type)
+    const keyword = useSelector( state => state.user.keyword)
+    const page = 1;
+    
+    useEffect(() => {
+      const param = {type: type, keyword: keyword, page: page}
+      dispatch(list(param))
+    },[]);
 
     return (<table border='1px' style={{textAlign:'center'}}>
     <thead>
@@ -16,11 +24,11 @@ const UserListForm = () => {
         <th>이메일</th></tr>
     </thead>
     <tbody>
-        {users.map((user) => (
-            <tr><td>{user.userId}</td>
-            <td>{user.username}</td>
-            <td>{user.name}</td>
-            <td>{user.email}</td></tr>
+        {users.map((i, userId) => (
+            <tr key={userId}><td>{i.userId}</td>
+            <td>{i.username}</td>
+            <td>{i.name}</td>
+            <td>{i.email}</td></tr>
         ))}
     
     </tbody>

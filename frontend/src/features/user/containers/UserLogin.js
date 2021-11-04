@@ -1,19 +1,19 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { loginPage } from 'features/user/reducer/userSlice'
+import { login } from 'features/user/reducer/userSlice'
 import { useForm } from "react-hook-form";
 import styled from 'styled-components'
-
+import Layout from 'features/common/components/Layout';
 export default function UserLogin() {
   const dispatch = useDispatch()
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   return (
-    <div>
+    <Layout><Main>
          <h1>로그인</h1>
     <form method='POST' 
     onSubmit={ 
-      handleSubmit(async (data) => {await dispatch(loginPage(data))})}>
+      handleSubmit(async (data) => {await dispatch(login(data))})}>
         <ul>
             <li>
                 <label>아이디 : </label>
@@ -44,10 +44,16 @@ export default function UserLogin() {
             </li>
         </ul>
         <input type="submit" value="로그인"/> 
-    </form>
-    </div>
+     </form></Main>
+    </Layout>
   );
 }
 const Span = styled.span`
     color: red
+`
+const Main = styled.div`
+width: 500px;
+margin: 0 auto;
+text-decoration:none
+text-align: center;
 `

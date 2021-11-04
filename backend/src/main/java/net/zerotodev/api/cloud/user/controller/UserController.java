@@ -31,14 +31,21 @@ public class UserController implements CommonController<User, Long> {
         return ResponseEntity.ok(
                 userService.login(user.getUsername(), user.getPassword()).orElse(new User()));
     }
+
+    @Override
+    public ResponseEntity<List<User>> findAll() {
+        return null;
+    }
+
     @Override
     @GetMapping("/{id}")
     public ResponseEntity<User> getById(@PathVariable Long id) {
         return ResponseEntity.ok(userRepository.getById(id));
     }
-    @GetMapping()
-    @Override
-    public ResponseEntity<List<User>> findAll() {
+    @GetMapping("/list/{page}")
+
+    public ResponseEntity<List<User>> getList(@PathVariable int page) {
+        System.out.println("::::::: PageNumber :::::::: "+page);
         return ResponseEntity.ok(userRepository.findAll());
     }
 
@@ -64,8 +71,17 @@ public class UserController implements CommonController<User, Long> {
     }
 
     @Override
-    public ResponseEntity<Boolean> existsById(Long id) {
-        return ResponseEntity.ok(userRepository.existsById(id));
+    @GetMapping("/existsById/{id}")
+    public ResponseEntity<Boolean> existsById(@PathVariable Long id) {
+        System.out.println(" id " + id);
+        boolean b = userRepository.existsById(id);
+        System.out.println(" Exist : "+b);
+        return ResponseEntity.ok(b);
+    }
+
+    @GetMapping("/exist/{username}")
+    public ResponseEntity<Boolean> exist(@PathVariable String username) {
+        return ResponseEntity.ok(userRepository.existsByUsername(username));
     }
 
     @Override
@@ -75,7 +91,7 @@ public class UserController implements CommonController<User, Long> {
     @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
-        System.out.println(" id " + id);
+
         userRepository.deleteById(id);
         return ResponseEntity.ok("SUCCESS");
     }

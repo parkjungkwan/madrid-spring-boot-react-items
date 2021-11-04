@@ -1,11 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { modifyPage } from 'features/user/reducer/userSlice'
-
+import { modify } from 'features/user/reducer/userSlice'
+import Layout from 'features/common/components/Layout';
+import styled from 'styled-components'
 export default function UserModify() {
     const dispatch = useDispatch()
     const sessionUser = JSON.parse(localStorage.getItem('sessionUser')); 
-    const [modify, setModify] = useState({
+    const [param, setParam] = useState({
         userId: sessionUser.userId,
         username:sessionUser.username, 
         password:sessionUser.password, 
@@ -13,21 +14,21 @@ export default function UserModify() {
         name:sessionUser.name, 
         regDate: sessionUser.regDate
     })
-    const {userId, username, password, email, name} = modify
+    const {userId, username, password, email, name} = param
     const handleChange = e => {
         const { value, name } = e.target
-        setModify({
-            ...modify,
+        setParam({
+            ...param,
             [name] : value
         })
     }
   return (
-    <div>
+    <Layout><Main>
          <h1>회원정보 수정</h1>
     <form method='PUT' onSubmit={useCallback(
         e => {
             e.preventDefault()
-            dispatch(modifyPage({...modify}))
+            dispatch(modify({...param}))
         }
     )} >
         <ul>
@@ -68,7 +69,13 @@ export default function UserModify() {
             </li>
 
         </ul>
-    </form>
-    </div>
+    </form></Main>
+    </Layout>
   );
 }
+const Main = styled.div`
+width: 500px;
+margin: 0 auto;
+text-decoration:none
+text-align: center;
+`

@@ -17,4 +17,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "from users u where u.username = :username and u.password = :password",
     nativeQuery = true)
     Optional<User> login(@Param("username") String username, @Param("password") String password);
+    boolean existsByUsername(@Param("username") String username);
 }
