@@ -45,7 +45,6 @@ public class UserController implements CommonController<User, Long> {
     @GetMapping("/list/{page}")
 
     public ResponseEntity<List<User>> getList(@PathVariable int page) {
-        System.out.println("::::::: PageNumber :::::::: "+page);
         return ResponseEntity.ok(userRepository.findAll());
     }
 
