@@ -25,6 +25,10 @@ public class DeptController implements CommonController<Dept, Long> {
         return ResponseEntity.ok(deptRepository.findEmployeesByDeptNo(count).orElse(new ArrayList<>()));
     }
 
+    @GetMapping("/find-dept-which-has-max-emp-count")
+    public ResponseEntity<List<DeptInfo>> findDeptWhichHasMaxEmpCount(){
+        return ResponseEntity.ok(deptRepository.findDeptWhichHasMaxEmpCount());
+    }
 
     @Override
     public ResponseEntity<List<Dept>> findAll() {
