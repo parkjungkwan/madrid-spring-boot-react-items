@@ -8,6 +8,7 @@ import net.zerotodev.api.cloud.dept.repository.DeptRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @CrossOrigin("*")
@@ -21,7 +22,7 @@ public class DeptController implements CommonController<Dept, Long> {
 
     @GetMapping("/find-depts-by-emp-count/{count}")
     public ResponseEntity<List<DeptInfo>> findDeptsByEmpCount(@PathVariable int count){
-        return ResponseEntity.ok(deptRepository.findEmployeesByDeptNo(count).orElse(null));
+        return ResponseEntity.ok(deptRepository.findEmployeesByDeptNo(count).orElse(new ArrayList<>()));
     }
 
 
